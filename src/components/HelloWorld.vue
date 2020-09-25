@@ -1,7 +1,7 @@
 <template>
-  <v-container class="mt-12" fluid>
+  <v-container class="mt-12">
     <v-layout align-center="center" justify-center="center" row wrap>
-      <v-flex class="md3 xs12 sm4 lg6 justify-center mb-6">
+      <v-flex class="md3 xs10 sm4 lg6 justify-center mb-6">
         <v-img class="mx-auto mb-12" src="../assets/logo.png"></v-img>
       </v-flex>
     </v-layout>
