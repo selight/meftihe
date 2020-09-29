@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <HelloWorld />
+      <router-view />
     </v-main>
   </v-app>
 </template>
@@ -14,7 +14,7 @@ export default Vue.extend({
   name: "App",
 
   components: {
-    HelloWorld
+
   },
 
   data: () => ({
