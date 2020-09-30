@@ -34,7 +34,7 @@ export default Vue.extend({
     user: null
   }),
   created(): void {
-    this.user = this.$store.state.user.displayName;
+ this.user=this.$store.state.user.displayName
   }
 });
 </script>
