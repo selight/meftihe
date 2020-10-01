@@ -2,6 +2,7 @@
   <v-img src="../assets/back.jpeg" min-height="100%">
     <div class="home">
       <search />
+      <p>Hey lov {{ user }}</p>
       <v-fab-transition>
         <v-btn
           v-show="!hidden"
@@ -21,12 +22,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Vue } from "vue-property-decorator";
 import search from "../components/search.vue";
-@Component({
+export default Vue.extend({
+  name: "App",
+
   components: {
     search
+  },
+  data: () => ({
+    user: null
+  }),
+  created(): void {
+ this.user=this.$store.state.user.displayName
   }
-})
-export default class Home extends Vue {}
+});
 </script>
