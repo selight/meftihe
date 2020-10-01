@@ -2,9 +2,10 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import * as firebase from "firebase";
+import axios from "axios"
 
-Vue.use(Vuex);
-
+Vue.use(Vuex)
+axios.defaults.baseURL='http://localhost:8080/'
 export default new Vuex.Store({
   state: {
     user: null
@@ -33,7 +34,15 @@ export default new Vuex.Store({
               reject(err);
             });
       }))
-    }
+    },
+      search(context,searchWord){
+        return new Promise(((resolve, reject) => {
+            axios.get('/solutions'+searchWord).then(response => {
+                resolve(response);
+            }).catch(error=>
+            reject(error))
+        }))
+      }
   },
   modules: {}
 });

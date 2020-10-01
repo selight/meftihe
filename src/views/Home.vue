@@ -1,8 +1,6 @@
 <template>
   <v-img src="../assets/back.jpeg" min-height="100%">
-    <div class="home">
-      <search />
-      <p>Hey lov {{ user }}</p>
+    <v-container>
       <v-fab-transition>
         <v-btn
           v-show="!hidden"
@@ -17,7 +15,12 @@
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-fab-transition>
-    </div>
+      <v-row>
+        <v-col class="mt-n3">
+          <search />
+        </v-col>
+      </v-row>
+    </v-container>
   </v-img>
 </template>
 
@@ -34,7 +37,7 @@ export default Vue.extend({
     user: null
   }),
   created(): void {
- this.user=this.$store.state.user.displayName
+    this.user = this.$store.state.user.displayName;
   }
 });
 </script>
