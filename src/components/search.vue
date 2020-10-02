@@ -1,23 +1,24 @@
 <template>
   <v-container fluid>
-    <v-autocomplete
+    <v-combobox
       prepend-inner-icon="mdi-magnify"
       solo-inverted
       rounded
       color="yellow"
       :items="recentSearch"
       :search-input.sync="search"
+      v-model="input"
     >
-      <template v-slot:no-data>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>
-              No results matching {{ search }}.
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </template>
-    </v-autocomplete>
+      <!--      <template v-slot:no-data>-->
+      <!--        <v-list-item>-->
+      <!--          <v-list-item-content>-->
+      <!--            <v-list-item-title>-->
+      <!--              No results matching {{ search }}.-->
+      <!--            </v-list-item-title>-->
+      <!--          </v-list-item-content>-->
+      <!--        </v-list-item>-->
+      <!--      </template>-->
+    </v-combobox>
   </v-container>
   <!--    <v-text-field-->
   <!--      prepend-inner-icon="mdi-magnify"-->
@@ -36,9 +37,6 @@ export default {
   name: "home",
   data: function() {
     return {
-      isActive: true,
-      isSearching: false,
-      name: "vue-js",
       recentSearch: ["hello", "seliye", "how are you"]
     };
   },
