@@ -16,10 +16,16 @@
         </v-btn>
       </v-fab-transition>
       <v-row>
-        <v-col class="mt-n3">
+        <v-col class="mt-n3 mb-n3">
           <search />
         </v-col>
       </v-row>
+      <div style="text-align: center">
+        <H4 style="color: #000000; text-shadow: 1px 1px 5px gray;"
+          >Get solutions for all your problems at MEFTIHE!</H4
+        >
+      </div>
+      <card />
     </v-container>
   </v-img>
 </template>
@@ -27,11 +33,12 @@
 <script lang="ts">
 import { Vue } from "vue-property-decorator";
 import search from "../components/search.vue";
+import card from "../components/card.vue";
 export default Vue.extend({
   name: "App",
-
   components: {
-    search
+    search,
+    card
   },
   data: () => ({
     user: null
