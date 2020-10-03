@@ -3,7 +3,6 @@
     <v-container>
       <v-fab-transition>
         <v-btn
-          v-show="!hidden"
           color="#fcca14"
           dark
           absolute
@@ -11,10 +10,12 @@
           right
           class="mb-12"
           fab
+          v-on:click="$router.push('/problem')"
         >
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-fab-transition>
+      <v-btn v-on:click="logOut">logout</v-btn>
       <v-row>
         <v-col class="mt-n3">
           <search />
@@ -38,6 +39,13 @@ export default Vue.extend({
   }),
   created(): void {
     this.user = this.$store.state.user.displayName;
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch("logOut").then(() => {
+        this.$router.push("/login");
+      });
+    }
   }
 });
 </script>

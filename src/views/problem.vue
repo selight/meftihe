@@ -2,7 +2,7 @@
   ><v-container>
     <v-row class="mt-n3">
       <v-toolbar dense>
-        <v-btn icon>
+        <v-btn icon v-on:click="$router.push('/home')">
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
         <v-toolbar-title>Add problem</v-toolbar-title>
