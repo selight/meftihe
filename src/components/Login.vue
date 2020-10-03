@@ -28,20 +28,9 @@ export default Vue.extend({
   data: () => ({}),
   methods: {
     login() {
-      this.$store.dispatch("signInWithGoogle").then(result => {
+      this.$store.dispatch("signInWithGoogle").then(() => {
         this.$router.push("/home");
       });
-    //   const provider = new firebase.auth.GoogleAuthProvider();
-    //   firebase
-    //     .auth()
-    //     .signInWithPopup(provider)
-    //     .then(result => {
-    //       this.$store.state.user = result.user;
-    //       this.$router.replace("/home");
-    //     })
-    //     .catch(err => {
-    //       alert("Oops. " + err.message);
-    //     });
     }
   }
 });

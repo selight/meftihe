@@ -8,28 +8,11 @@
       :items="recentSearch"
       :search-input.sync="search"
       v-model="input"
+      v-on:keyup.enter="addtorecent(input)"
     >
-      <!--      <template v-slot:no-data>-->
-      <!--        <v-list-item>-->
-      <!--          <v-list-item-content>-->
-      <!--            <v-list-item-title>-->
-      <!--              No results matching {{ search }}.-->
-      <!--            </v-list-item-title>-->
-      <!--          </v-list-item-content>-->
-      <!--        </v-list-item>-->
-      <!--      </template>-->
     </v-combobox>
+    {{ this.input }}
   </v-container>
-  <!--    <v-text-field-->
-  <!--      prepend-inner-icon="mdi-magnify"-->
-  <!--      style="border-radius: 50px; border: solid #fcfa7f 2px;"-->
-  <!--      solo-->
-  <!--      flat-->
-  <!--      hide-details-->
-  <!--      @focus="isSearching = true"-->
-  <!--      @blur="isSearching = false"-->
-  <!--      v-bind:class="isSearching ? 'search-top' : 'search-center'"-->
-  <!--    ></v-text-field>-->
 </template>
 
 <script>
@@ -37,10 +20,15 @@ export default {
   name: "home",
   data: function() {
     return {
-      recentSearch: ["hello", "seliye", "how are you"]
+      input: "",
+      recentSearch: this.$store.state.recentSearches
     };
   },
-  methods: {}
+  methods: {
+    addtorecent(input) {
+      this.$store.dispatch("addToRecentSearches", input);
+    }
+  }
 };
 </script>
 
