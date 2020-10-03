@@ -23,7 +23,7 @@
       </v-row>
       <div style="text-align: center">
         <H4 style="color: #000000; text-shadow: 1px 1px 5px gray;"
-          >Get solutions for all your problems at MEFTIHE!</H4
+          >Get Solutions for all your Problems at MEFTIHE!</H4
         >
       </div>
       <card />

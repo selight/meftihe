@@ -18,7 +18,7 @@ export default {
   name: "card",
   data: function() {
     return {
-      items: [{ title: "Bar", description:"Foo"}]
+      items: [{ title: "Barrr", description:"Foo"}]
     };
   }
 };

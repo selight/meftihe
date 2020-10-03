@@ -14,16 +14,6 @@
         <v-textarea
           readonly
           outlined
-          label="Title"
-          auto-grow
-          rows="1"
-          row-height="30"
-        ></v-textarea>
-      </v-row>
-      <v-row>
-        <v-textarea
-          readonly
-          outlined
           label="Problem"
           auto-grow
           rows="4"
