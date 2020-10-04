@@ -39,7 +39,9 @@ const routes: Array<RouteConfig> = [
     path: "/sol",
     name: "Solution",
     component: () => import("../views/solution.vue"),
-
+    meta: {
+      requiresAuth: true
+    }
   }
 ];
 
