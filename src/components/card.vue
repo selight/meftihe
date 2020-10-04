@@ -2,7 +2,11 @@
   <v-container>
     <v-row dense>
       <v-col cols="12">
-        <v-card color="#f5f76f" v-for="item in items" :key="item.title">
+        <v-card
+          color="rgba(252,218,54,0.6)"
+          v-for="item in items"
+          :key="item.title"
+        >
           <v-card-title class="headline">
             {{ item.title }}
           </v-card-title>
@@ -18,7 +22,16 @@ export default {
   name: "card",
   data: function() {
     return {
-      items: [{ title: "Barrr", description:"Foo"}]
+      items: [
+        { title: "Barrr", description: "Foo" },
+        { title: "Barrr", description: "Foo" },
+        { title: "Barrr", description: "Foo" },
+        { title: "Barrr", description: "Foo" },
+        { title: "Barrr", description: "Foo" },
+        { title: "Barrr", description: "Foo" },
+        { title: "Barrr", description: "Foo" },
+        { title: "Barrr", description: "Foo" }
+      ]
     };
   }
 };

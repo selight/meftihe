@@ -1,5 +1,5 @@
 <template>
-  <v-img src="../assets/back.jpeg" min-height="100%">
+  <v-img src="../assets/vec.jpg" min-height="100%">
     <v-container>
       <v-fab-transition>
         <v-btn
@@ -15,17 +15,33 @@
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-fab-transition>
-      <v-btn v-on:click="logOut">logout</v-btn>
-      <v-row>
+      <v-dialog v-model="dialog" persistent max-width="290">
+        <template v-slot:activator="{ on, attrs }">
+          <div align="right">
+            <v-icon v-bind="attrs" v-on="on">mdi-logout</v-icon>
+          </div>
+        </template>
+        <v-card>
+          <v-card-title class="headline">
+            Meftihe
+          </v-card-title>
+          <v-card-text>Are you sure you want to log out?</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="green darken-1" text @click="dialog = false">
+              No
+            </v-btn>
+            <v-btn v-on:click="logOut" color="green darken-1" text>
+              Yes
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-row class="mb-n5">
         <v-col class="mt-n3 mb-n3">
           <search />
         </v-col>
       </v-row>
-      <div style="text-align: center">
-        <H4 style="color: #000000; text-shadow: 1px 1px 5px gray;"
-          >Get Solutions for all your Problems at MEFTIHE!</H4
-        >
-      </div>
       <card />
     </v-container>
   </v-img>
@@ -42,13 +58,15 @@ export default Vue.extend({
     card
   },
   data: () => ({
-    user: null
+    user: null,
+    dialog: false
   }),
   created(): void {
     this.user = this.$store.state.user.displayName;
   },
   methods: {
     logOut() {
+      this.dialog = false;
       this.$store.dispatch("logOut").then(() => {
         this.$router.push("/login");
       });

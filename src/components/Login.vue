@@ -1,5 +1,5 @@
 <template>
-  <v-img src="../assets/brush.jpeg" max-height="100%">
+  <v-img src="../assets/vec.jpg" min-height="100%">
     <v-container class="mt-12">
       <v-layout align-center="center" justify-center="center" row wrap>
         <v-flex class="md3 xs10 sm4 lg4 justify-center mb-6">
@@ -20,7 +20,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import * as firebase from "firebase";
 
 export default Vue.extend({
   name: "Login",
