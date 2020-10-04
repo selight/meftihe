@@ -13,8 +13,8 @@
         <v-col ref="form" v-model="form" class="mt-4">
           <v-row>
             <v-textarea
-              v-model="req"
-              :rules="[rules.req]"
+              v-model="title"
+              :rules="[rules.title]"
               outlined
               label="Title"
               auto-grow
@@ -24,8 +24,8 @@
           </v-row>
           <v-row>
             <v-textarea
-              v-model="requ"
-              :rules="[rules.requ]"
+              v-model="description"
+              :rules="[rules.description]"
               outlined
               label="Problem"
               auto-grow
@@ -35,8 +35,8 @@
           </v-row>
           <v-row>
             <v-textarea
-              v-model="requi"
-              :rules="[rules.requi]"
+              v-model="solution"
+              :rules="[rules.solution]"
               outlined
               label="Solution"
               auto-grow
@@ -57,8 +57,21 @@
           class="white--text"
           color="deep-purple accent-4"
           depressed
+          v-on:click="create"
+          v-if="this.id === null"
         >
           Submit
+        </v-btn>
+        <v-btn
+          :disabled="!form"
+          :loading="isLoading"
+          class="white--text"
+          color="deep-purple accent-4"
+          depressed
+          v-on:click="update"
+          v-if="this.id !== null"
+        >
+          update
         </v-btn>
       </v-card-actions>
     </v-container>
@@ -67,16 +80,47 @@
 <script>
 export default {
   data: () => ({
-    req: undefined,
-    requ: undefined,
-    requi: undefined,
+    title: undefined,
+    description: undefined,
+    solution: undefined,
     form: false,
     isLoading: false,
     rules: {
-      req: v => !!v || "This field is required",
-      requ: v => !!v || "This field is required",
-      requi: v => !!v || "This field is required"
+      title: v => !!v || "This field is required",
+      description: v => !!v || "This field is required",
+      solution: v => !!v || "This field is required"
+    },
+    id: null
+  }),
+  methods: {
+    create() {
+      this.$store.dispatch("create", {
+        title: this.title,
+        description: this.description,
+        solution: this.solution,
+        email: this.$store.state.user.email
+      });
+    },
+    update() {
+      this.$store.dispatch("edit", {
+        title: this.title,
+        description: this.description,
+        solution: this.solution,
+        email: this.$store.state.user.email
+      });
+      this.$router.push("/sol");
     }
-  })
+  },
+  created() {
+    this.id = this.$store.state.id;
+    if (this.$store.state.id !== null) {
+      this.$store.dispatch("getOne", this.$store.state.id).then(response => {
+        this.title = response.data.title;
+        this.description = response.data.description;
+        this.solution = response.data.solution;
+        this.email = response.data.email;
+      });
+    }
+  }
 };
 </script>

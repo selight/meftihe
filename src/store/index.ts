@@ -4,12 +4,18 @@ import createPersistedState from "vuex-persistedstate";
 import * as firebase from "firebase";
 import axios from "axios";
 
+
 Vue.use(Vuex);
-axios.defaults.baseURL = "http://localhost:3200/";
+axios.defaults.baseURL = "http://localhost:3002/api/solutions";
+axios.defaults.proxy = false;
 export default new Vuex.Store({
   state: {
     user: null,
-    recentSearches: ["vue", "node", "problem"]
+    recentSearches: ["vue", "node", "problem"],
+    problem: {},
+    id: null,
+    searchResults:{},
+    j:false,
   },
   plugins: [createPersistedState()],
   mutations: {
@@ -19,11 +25,22 @@ export default new Vuex.Store({
     logOut: function(state, user) {
       state.user = user;
     },
-      addToRecent:function (state,input) {
-          if (input.trim() !== null || input.trim() !== "") {
-              state.recentSearches.push(input);
-              //TO-DO: whitespace not handled
-          }
+    addToRecent: function(state, input) {
+      if (input.trim() !== null || input.trim() !== "") {
+        state.recentSearches.push(input);
+        //TO-DO: whitespace not handled
+      }
+    },
+    create(state, problem) {
+      state.problem = problem;
+    },
+    search(state,searchResults){
+      state.searchResults=searchResults;
+
+      console.log("here",state.searchResults)
+    },
+    all(state,all){
+      state.searchResults=all;
     }
   },
   actions: {
@@ -47,11 +64,17 @@ export default new Vuex.Store({
     search(context, searchWord) {
       return new Promise((resolve, reject) => {
         axios
-          .get("/solutions" + searchWord)
+          .get("/search?query=" + searchWord)
           .then(response => {
+            const searchResults=response.data;
+            console.log(response.data,"SDF");
+            context.commit("search",searchResults);
             resolve(response);
           })
-          .catch(error => reject(error));
+          .catch(error => {
+            console.log(error.message);
+            reject(error);
+          });
       });
     },
     logOut(context) {
@@ -66,12 +89,68 @@ export default new Vuex.Store({
           });
       });
     },
-      addToRecentSearches(context,input){
-        return new Promise(() => {
-
-            context.commit("addToRecent",input)
-        })
-      }
+    addToRecentSearches(context, input) {
+      return new Promise(() => {
+        context.commit("addToRecent", input);
+      });
+    },
+    create(context, data) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post("/", data)
+          .then(response => {
+            const problem = response.data;
+            context.commit("create", problem);
+            resolve(response);
+          })
+          .catch(error => {
+            console.log(error.message);
+            reject(error);
+          });
+      });
+    },
+    getAll(context) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get("/")
+          .then(response => {
+            const all=response.data.rows;
+            console.log(response.data.rows);
+            context.commit("all",all);
+            resolve(response);
+          })
+          .catch(error => {
+            console.log(error.message);
+            reject(error);
+          });
+      });
+    },
+    edit(context,data) {
+      return new Promise((resolve, reject) => {
+        axios
+          .put("/update/" + this.state.id,data)
+          .then(response => {
+            resolve(response);
+          })
+          .catch(error => {
+            console.log(error.message);
+            reject(error);
+          });
+      });
+    },
+    getOne(context, id) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get("/"+id)
+          .then(response => {
+            resolve(response);
+          })
+          .catch(error => {
+            console.log(error.message);
+            reject(error);
+          });
+      });
+    }
   },
   modules: {}
 });

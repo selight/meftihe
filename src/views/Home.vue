@@ -10,7 +10,7 @@
           right
           class="mb-12"
           fab
-          v-on:click="$router.push('/problem')"
+          v-on:click="create"
         >
           <v-icon>mdi-plus</v-icon>
         </v-btn>
@@ -39,7 +39,7 @@
       </v-dialog>
       <v-row class="mb-n5">
         <v-col class="mt-n3 mb-n3">
-          <search />
+          <search></search>
         </v-col>
       </v-row>
       <card />
@@ -59,7 +59,8 @@ export default Vue.extend({
   },
   data: () => ({
     user: null,
-    dialog: false
+    dialog: false,
+    problems: {}
   }),
   created(): void {
     this.user = this.$store.state.user.displayName;
@@ -70,6 +71,10 @@ export default Vue.extend({
       this.$store.dispatch("logOut").then(() => {
         this.$router.push("/login");
       });
+    },
+    create() {
+      this.$store.state.id = null;
+      this.$router.push("/problem");
     }
   }
 });
