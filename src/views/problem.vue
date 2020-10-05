@@ -56,7 +56,7 @@
           :disabled="!form"
           :loading="isLoading"
           class="white--text"
-          color="deep-purple accent-4"
+          color="#fcca14"
           depressed
           v-if="this.id === null"
         >
@@ -68,7 +68,9 @@
               Meftihe
             </v-card-title>
             <v-card-text
-              >Are you sure you want to add this problem?</v-card-text
+              >Are you sure you want to <span v-if="this.id === null">add</span
+              ><span v-if="this.id !== null">update</span> this
+              problem?</v-card-text
             >
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -99,7 +101,7 @@
           :disabled="!form"
           :loading="isLoading"
           class="white--text"
-          color="deep-purple accent-4"
+          color="#fcca14"
           depressed
           v-if="this.id !== null"
         >

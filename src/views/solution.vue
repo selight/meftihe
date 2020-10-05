@@ -47,17 +47,20 @@
               <h4>Posted by</h4>
               <v-container
                 class="mt-2"
-                style="background: #82887e; border-radius: 5px; padding: 15px"
+                style="background: #dbbda2a1; border-radius: 5px; padding: 15px;  color: #5792d2"
                 v-model="email"
               >
                 {{ email }}
               </v-container>
-              <v-spacer></v-spacer>
-              <v-btn text v-if="edit" v-on:click="editMethod">edit</v-btn>
+
             </div>
+
           </v-row>
         </v-item-group>
       </v-col>
+      <div align="right">
+        <v-btn class="white--text" color="#fcca14" v-if="edit" v-on:click="editMethod">edit</v-btn>
+      </div>
     </v-container>
   </v-img>
 </template>
