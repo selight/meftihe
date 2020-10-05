@@ -7,8 +7,7 @@
       color="yellow"
       :items="recentSearch"
       v-model="input"
-      v-on:keyup.enter="addtorecent(input)"
-      v-on:change="addtorecent(input)"
+      v-on:change="addToRecent(input)"
     >
     </v-combobox>
   </v-container>
@@ -24,12 +23,9 @@ export default {
     };
   },
   methods: {
-    addtorecent(input) {
+    addToRecent(input) {
       this.$store.dispatch("addToRecentSearches", input);
       this.$store.dispatch("search", input);
-      console.log("DS",this.$store.state.searchResults);
-      console.log("dsd",this.$store.state.problems);
-
     }
   }
 };

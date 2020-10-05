@@ -15,7 +15,6 @@ export default new Vuex.Store({
     problem: {},
     id: null,
     searchResults:{},
-    j:false,
   },
   plugins: [createPersistedState()],
   mutations: {
