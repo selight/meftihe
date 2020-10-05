@@ -51,8 +51,9 @@
                 v-model="email"
               >
                 {{ email }}
-                <v-btn v-if="edit" v-on:click="editMethod">edit</v-btn>
               </v-container>
+              <v-spacer></v-spacer>
+              <v-btn text v-if="edit" v-on:click="editMethod">edit</v-btn>
             </div>
           </v-row>
         </v-item-group>
