@@ -13,13 +13,13 @@
         <v-item-group>
           <v-row class="mt-4">
             <div>
-              <h2>This is a title is a title is a title</h2>
+              <v-container class="display-1">This is a title is a title is a title</v-container>
             </div>
           </v-row>
           <v-row class="mt-4">
             <div>
               <h2>Problem</h2>
-              <p
+              <v-container
                 class="mt-2"
                 style="background: #fffff0; border:solid #fce900; border-radius: 5px; padding: 15px"
               >
@@ -29,31 +29,31 @@
                 problem is a problem a problem is a problem a problem is a
                 problem a problem is a problem a problem is a problem a problem
                 is a problem a problem
-              </p>
+              </v-container>
             </div>
           </v-row>
           <v-row class="mt-4">
             <div>
               <h2>Solution</h2>
-              <p
+              <v-container
                 class="mt-2"
                 style="background: #fffff0; border:solid #26fc09; border-radius: 5px; padding: 15px"
               >
                 This is a solution to the problem, is a solution to the problem
                 is a solution to the problem is a solution to the problem is a
                 solution to the problem is a solution to the problem
-              </p>
+              </v-container>
             </div>
           </v-row>
           <v-row class="mt-4">
             <div>
               <h4>Posted by</h4>
-              <p
+              <v-container
                 class="mt-2"
                 style="background: #82887e; border-radius: 5px; padding: 15px"
               >
                 Loremipsum@gmail.com
-              </p>
+              </v-container>
             </div>
           </v-row>
         </v-item-group>
