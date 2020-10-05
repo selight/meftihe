@@ -9,8 +9,8 @@
           <v-toolbar-title>Add problem</v-toolbar-title>
         </v-toolbar>
       </v-row>
-      <v-form>
-        <v-col ref="form" v-model="form" class="mt-4">
+      <v-form ref="form" v-model="form" class="mt-4">
+        <v-col>
           <v-row>
             <v-textarea
               v-model="title"
@@ -51,28 +51,72 @@
           Clear
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn
-          :disabled="!form"
-          :loading="isLoading"
-          class="white--text"
-          color="deep-purple accent-4"
-          depressed
-          v-on:click="create"
-          v-if="this.id === null"
-        >
-          Submit
-        </v-btn>
-        <v-btn
-          :disabled="!form"
-          :loading="isLoading"
-          class="white--text"
-          color="deep-purple accent-4"
-          depressed
-          v-on:click="update"
-          v-if="this.id !== null"
-        >
-          update
-        </v-btn>
+        <v-dialog v-model="dialog" persistent max-width="290">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              :disabled="!form"
+              :loading="isLoading"
+              class="white--text"
+              color="deep-purple accent-4"
+              depressed
+              v-if="this.id === null"
+            >
+              Submit
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title class="headline">
+              Meftihe
+            </v-card-title>
+            <v-card-text
+              >Are you sure you want to add this problem?</v-card-text
+            >
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="dialog = false">
+                No
+              </v-btn>
+              <v-btn v-on:click="create" color="green darken-1" text>
+                Yes
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialog" persistent max-width="290">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              :disabled="!form"
+              :loading="isLoading"
+              class="white--text"
+              color="deep-purple accent-4"
+              depressed
+              v-if="this.id !== null"
+            >
+              update
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title class="headline">
+              Meftihe
+            </v-card-title>
+            <v-card-text
+              >Are you sure you want to update this problem?</v-card-text
+            >
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="dialog = false">
+                No
+              </v-btn>
+              <v-btn v-on:click="update" color="green darken-1" text>
+                Yes
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-card-actions>
     </v-container>
   </v-img>
@@ -84,6 +128,7 @@ export default {
     description: undefined,
     solution: undefined,
     form: false,
+    dialog: false,
     isLoading: false,
     rules: {
       title: v => !!v || "This field is required",
