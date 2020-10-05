@@ -32,11 +32,10 @@ export default new Vuex.Store({
     },
     create(state, problem) {
       state.problem = problem;
+      state.id=problem.id;
     },
     search(state,searchResults){
       state.searchResults=searchResults;
-
-      console.log("here",state.searchResults)
     },
     all(state,all){
       state.searchResults=all;
@@ -114,7 +113,6 @@ export default new Vuex.Store({
           .get("/")
           .then(response => {
             const all=response.data.rows;
-            console.log(response.data.rows);
             context.commit("all",all);
             resolve(response);
           })

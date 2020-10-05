@@ -13,7 +13,9 @@
         <v-item-group>
           <v-row class="mt-4">
             <div>
-              <v-container class="display-1">This is a title is a title is a title</v-container>
+              <v-container class="display-1" v-model="title">{{
+                title
+              }}</v-container>
             </div>
           </v-row>
           <v-row class="mt-4">
@@ -22,13 +24,9 @@
               <v-container
                 class="mt-2"
                 style="background: #fffff0; border:solid #fce900; border-radius: 5px; padding: 15px"
+                v-model="description"
               >
-                This is a problem a problem is a problem a problem is a problem
-                a problem is a problem a problem is a problem a problem is a
-                problem a problem is a problem a problem This is a problem a
-                problem is a problem a problem is a problem a problem is a
-                problem a problem is a problem a problem is a problem a problem
-                is a problem a problem
+                {{ description }}
               </v-container>
             </div>
           </v-row>
@@ -38,10 +36,9 @@
               <v-container
                 class="mt-2"
                 style="background: #fffff0; border:solid #26fc09; border-radius: 5px; padding: 15px"
+                v-model="solution"
               >
-                This is a solution to the problem, is a solution to the problem
-                is a solution to the problem is a solution to the problem is a
-                solution to the problem is a solution to the problem
+                {{ solution }}
               </v-container>
             </div>
           </v-row>
@@ -51,8 +48,10 @@
               <v-container
                 class="mt-2"
                 style="background: #82887e; border-radius: 5px; padding: 15px"
+                v-model="email"
               >
-                Loremipsum@gmail.com
+                {{ email }}
+                <v-btn v-if="edit" v-on:click="editMethod">edit</v-btn>
               </v-container>
             </div>
           </v-row>
@@ -65,7 +64,15 @@
 <script>
 export default {
   name: "solution",
-  created() {
+  data: () => ({
+    id: null,
+    title: null,
+    description: null,
+    solution: null,
+    email: null,
+    edit: false
+  }),
+  mounted() {
     this.id = this.$store.state.id;
     if (this.$store.state.id !== null) {
       this.$store.dispatch("getOne", this.$store.state.id).then(response => {
@@ -73,7 +80,16 @@ export default {
         this.description = response.data.description;
         this.solution = response.data.solution;
         this.email = response.data.email;
+        if (this.$store.state.user.email === response.data.email) {
+          this.edit = true;
+        }
       });
+    }
+  },
+  methods: {
+    editMethod() {
+      this.$store.state.id = this.id;
+      this.$router.replace("/problem");
     }
   }
 };

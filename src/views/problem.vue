@@ -51,21 +51,18 @@
           Clear
         </v-btn>
         <v-spacer></v-spacer>
+        <v-btn
+          v-on:click.stop="dialog = true"
+          :disabled="!form"
+          :loading="isLoading"
+          class="white--text"
+          color="deep-purple accent-4"
+          depressed
+          v-if="this.id === null"
+        >
+          Submit
+        </v-btn>
         <v-dialog v-model="dialog" persistent max-width="290">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              v-bind="attrs"
-              v-on="on"
-              :disabled="!form"
-              :loading="isLoading"
-              class="white--text"
-              color="deep-purple accent-4"
-              depressed
-              v-if="this.id === null"
-            >
-              Submit
-            </v-btn>
-          </template>
           <v-card>
             <v-card-title class="headline">
               Meftihe
@@ -78,45 +75,36 @@
               <v-btn color="green darken-1" text @click="dialog = false">
                 No
               </v-btn>
-              <v-btn v-on:click="create" color="green darken-1" text>
+              <v-btn
+                v-if="this.id !== null"
+                v-on:click="update"
+                color="green darken-1"
+                text
+              >
+                Yes
+              </v-btn>
+              <v-btn
+                v-if="this.id === null"
+                v-on:click="create"
+                color="green darken-1"
+                text
+              >
                 Yes
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <v-dialog v-model="dialog" persistent max-width="290">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              v-bind="attrs"
-              v-on="on"
-              :disabled="!form"
-              :loading="isLoading"
-              class="white--text"
-              color="deep-purple accent-4"
-              depressed
-              v-if="this.id !== null"
-            >
-              update
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title class="headline">
-              Meftihe
-            </v-card-title>
-            <v-card-text
-              >Are you sure you want to update this problem?</v-card-text
-            >
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="green darken-1" text @click="dialog = false">
-                No
-              </v-btn>
-              <v-btn v-on:click="update" color="green darken-1" text>
-                Yes
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+        <v-btn
+          v-on:click.stop="dialog = true"
+          :disabled="!form"
+          :loading="isLoading"
+          class="white--text"
+          color="deep-purple accent-4"
+          depressed
+          v-if="this.id !== null"
+        >
+          update
+        </v-btn>
       </v-card-actions>
     </v-container>
   </v-img>
@@ -139,21 +127,26 @@ export default {
   }),
   methods: {
     create() {
-      this.$store.dispatch("create", {
-        title: this.title,
-        description: this.description,
-        solution: this.solution,
-        email: this.$store.state.user.email
-      });
+      this.dialog = false;
+      this.$store
+        .dispatch("create", {
+          title: this.title,
+          description: this.description,
+          solution: this.solution,
+          email: this.$store.state.user.email
+        })
+        .then(() => this.$router.push("/sol"));
     },
     update() {
-      this.$store.dispatch("edit", {
-        title: this.title,
-        description: this.description,
-        solution: this.solution,
-        email: this.$store.state.user.email
-      });
-      this.$router.push("/sol");
+      this.dialog = false;
+      this.$store
+        .dispatch("edit", {
+          title: this.title,
+          description: this.description,
+          solution: this.solution,
+          email: this.$store.state.user.email
+        })
+        .then(() => this.$router.push("/sol"));
     }
   },
   created() {

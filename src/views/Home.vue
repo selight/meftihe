@@ -10,6 +10,7 @@
           right
           class="mb-12"
           fab
+          fixed
           v-on:click="create"
         >
           <v-icon>mdi-plus</v-icon>
