@@ -62,15 +62,13 @@ export default new Vuex.Store({
     search(context, searchWord) {
       return new Promise((resolve, reject) => {
         axios
-          .get("/search?query=" + searchWord)
+          .post("/search",{title:searchWord})
           .then(response => {
             const searchResults=response.data;
-            console.log(response.data,"SDF");
             context.commit("search",searchResults);
             resolve(response);
           })
           .catch(error => {
-            console.log(error.message);
             reject(error);
           });
       });
@@ -102,7 +100,6 @@ export default new Vuex.Store({
             resolve(response);
           })
           .catch(error => {
-            console.log(error.message);
             reject(error);
           });
       });
@@ -114,11 +111,9 @@ export default new Vuex.Store({
           .then(response => {
             const all=response.data.data;
             context.commit("all",all);
-            console.log(all);
             resolve(response);
           })
           .catch(error => {
-            console.log(error.message);
             reject(error);
           });
       });
@@ -131,7 +126,6 @@ export default new Vuex.Store({
             resolve(response);
           })
           .catch(error => {
-            console.log(error.message);
             reject(error);
           });
       });
@@ -144,7 +138,6 @@ export default new Vuex.Store({
             resolve(response);
           })
           .catch(error => {
-            console.log(error.message);
             reject(error);
           });
       });

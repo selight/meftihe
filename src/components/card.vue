@@ -8,7 +8,7 @@
           v-for="(problem, i) in this.$store.state.searchResults"
           :key="i"
           class="mb-1"
-          v-on:click="getOne(problem._id)"
+          v-on:click="getOne(problem)"
         >
           <v-card-title class="headline">
             {{ problem.title }}
@@ -33,8 +33,8 @@ export default {
   },
   methods: {
 
-    getOne(id) {
-      this.$store.state.id = id;
+    getOne(problem) {
+      this.$store.state.id = problem._id?problem._id:problem.objectID;
       this.$router.push("/sol");
     }
   }
