@@ -8,7 +8,7 @@
           v-for="(problem, i) in this.$store.state.searchResults"
           :key="i"
           class="mb-1"
-          v-on:click="getOne(problem.id)"
+          v-on:click="getOne(problem._id)"
         >
           <v-card-title class="headline">
             {{ problem.title }}

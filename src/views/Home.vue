@@ -16,12 +16,10 @@
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-fab-transition>
+      <div align="right">
+        <v-icon v-on:click.stop="dialog=true">mdi-logout</v-icon>
+      </div>
       <v-dialog v-model="dialog" persistent max-width="290">
-        <template v-slot:activator="{ on, attrs }">
-          <div align="right">
-            <v-icon v-bind="attrs" v-on="on">mdi-logout</v-icon>
-          </div>
-        </template>
         <v-card>
           <v-card-title class="headline">
             Meftihe
@@ -63,9 +61,6 @@ export default Vue.extend({
     dialog: false,
     problems: {}
   }),
-  created(): void {
-    this.user = this.$store.state.user.displayName;
-  },
   methods: {
     logOut() {
       this.dialog = false;

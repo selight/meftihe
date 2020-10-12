@@ -4,6 +4,7 @@
       prepend-inner-icon="mdi-magnify"
       solo-inverted
       rounded
+      fixed
       color="yellow"
       :items="recentSearch"
       v-model="input"

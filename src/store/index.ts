@@ -6,7 +6,7 @@ import axios from "axios";
 
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "http://localhost:3002/api/solutions";
+axios.defaults.baseURL = "https://meftihefullstack.herokuapp.com/api/solutions/";
 axios.defaults.proxy = false;
 export default new Vuex.Store({
   state: {
@@ -95,7 +95,7 @@ export default new Vuex.Store({
     create(context, data) {
       return new Promise((resolve, reject) => {
         axios
-          .post("/", data)
+          .post("/add", data)
           .then(response => {
             const problem = response.data;
             context.commit("create", problem);
@@ -110,10 +110,11 @@ export default new Vuex.Store({
     getAll(context) {
       return new Promise((resolve, reject) => {
         axios
-          .get("/")
+          .get("/get-all")
           .then(response => {
-            const all=response.data.rows;
+            const all=response.data.data;
             context.commit("all",all);
+            console.log(all);
             resolve(response);
           })
           .catch(error => {
@@ -138,7 +139,7 @@ export default new Vuex.Store({
     getOne(context, id) {
       return new Promise((resolve, reject) => {
         axios
-          .get("/"+id)
+          .get("/get/"+id)
           .then(response => {
             resolve(response);
           })
